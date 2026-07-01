@@ -1,0 +1,16 @@
+[Unit]
+Description=Truma LIN Bus Master (remplace iNetX)
+After=network.target mosquitto.service
+Wants=mosquitto.service
+
+[Service]
+WorkingDirectory=/root/mqtt_scripts
+ExecStart=/root/venv/bin/python3 -u /root/mqtt_scripts/truma_master.py
+Restart=on-failure
+User=root
+Group=root
+StandardOutput=append:/var/log/mqtt_scripts/truma_master.log
+StandardError=append:/var/log/mqtt_scripts/truma_master.log
+
+[Install]
+WantedBy=multi-user.target
